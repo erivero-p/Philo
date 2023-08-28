@@ -6,35 +6,42 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:05:52 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:40:18 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:10:48 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-/* void	print_status(int status)
+void	print_status(t_thdata *philo, char st)
 {
-	if (status == 'f')
-		printf("")
-} */
+	int		time;
+	char	*status;
+
+	time = ft_time() - philo->info->start_time;
+	if (st == 'e')
+		status = "is eating";
+	if (st == 'f')
+		status = "has taken a fork";
+	printf("%ldms %d %s\n", time, philo->id, status);
+}
 
 void	eat(t_thdata *philo)
 {
 	if (philo->info->nop % 2 != 0 && philo->id == philo->info->nop)
 	{
-		pthread_mutex_lock(philo->rfork)
-		print_status();
-		pthread_mutex_lock(philo->lfork)
-		print_status();
+		pthread_mutex_lock(philo->rfork);
+		print_status(philo, 'f');
+		pthread_mutex_lock(philo->lfork);
+		print_status(philo, 'f');
 	}
 	else
 	{
-		pthread_mutex_lock(philo->lfork)
-//		print_status();
-		pthread_mutex_lock(philo->rfork)
-//		print_status();
+		pthread_mutex_lock(philo->lfork);
+		print_status(philo, 'f');
+		pthread_mutex_lock(philo->rfork);
+		print_status(philo, 'f');
 	}
-//	print_status(eat);
+	print_status(philo, 'e');
 	usleep(philo->info->time_to_eat * 1000);
 	philo->eat_count++;
 //	philo-> last_meal / time_left / whatever ya veremos
