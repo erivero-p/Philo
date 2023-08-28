@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:14:54 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/24 12:58:46 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:22:33 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ int	ph_atoi(char *str)
 		return (num);
 	else
 		return (-1);
-	
 }
 
 void	print_args(void)
 {
 	printf("Wrong arguments, the program shall be executed as shown below:\n");
-	printf("./philo number_of_philosophers time_to_die time_to_eat time_to_sleep\n");
-	printf("A 5th optional argument can be accepted as:");
+	printf("./philo number_of_philosophers time_to_die time_to_eat ");
+	printf("time_to_sleep\nA 5th optional argument can be accepted as:");
 	printf(" [number_of_times_each_philosopher_must_eat]\n");
 }
 
@@ -51,7 +50,7 @@ void	print_args(void)
 	printf("%i\n", info->time_to_sleep);
 	printf("%i\n", info->eat_times);
 } */
-bool	check_args(int	ac, char **av, t_main	*info)
+bool	check_args(int ac, char **av, t_main *info)
 {
 	if (ac == 5 || ac == 6)
 	{
@@ -65,9 +64,10 @@ bool	check_args(int	ac, char **av, t_main	*info)
 			info->eat_times = -42;
 	}
 	if (ac < 5 || ac > 6 || info->time_to_die == -1 || info->time_to_eat == -1
-		|| info->time_to_sleep == -1 || info->eat_times == -1 || info->nop == -1)
+		|| info->time_to_sleep == -1 || info->eat_times == -1
+		|| info->nop == -1)
 	{
-		print_args;
+		print_args();
 		return (false);
 	}
 	else

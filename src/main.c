@@ -6,18 +6,19 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:14:54 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/25 12:50:06 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:48:57 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-bool one_philo(t_main *info)
+/* void	one_philo(t_main *info)
 {
 	if (pthread_create(&info->tid[0], NULL))
-		return (false);
-	
-}
+		printf("Error creating threads\n");
+	else
+		
+} */
 
 int	main(int ac, char **av)
 {
@@ -27,14 +28,13 @@ int	main(int ac, char **av)
 	{
 		if (init(&info))
 		{
-			if (info->nop == 1)
+			if (info.nop == 1)
 				one_philo(&info);
 			else
+				ft_threads(&info);
 		}
-/* 		Me conviene sacar de la función init la creación de hilos
-		porque debería haber inicializado todo y considerar el caso de
-		un solo philo antes de ponerme a crear y llamar la rutina */
 	}
-	ft_clean(info);
+	if (&info)
+		ft_clean(info);
 	return (0);
 }
