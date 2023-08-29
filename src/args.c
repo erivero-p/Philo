@@ -6,13 +6,13 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:14:54 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/28 11:22:33 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:18:01 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	ph_atoi(char *str)
+static int	ph_atoi(char *str)
 {
 	int	i;
 	int	num;
@@ -34,7 +34,7 @@ int	ph_atoi(char *str)
 		return (-1);
 }
 
-void	print_args(void)
+static void	print_args(void)
 {
 	printf("Wrong arguments, the program shall be executed as shown below:\n");
 	printf("./philo number_of_philosophers time_to_die time_to_eat ");

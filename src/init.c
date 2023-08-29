@@ -6,13 +6,13 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:27:50 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/28 12:07:45 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:50:02 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-bool	ph_alloc(t_main *info)
+static bool	philo_alloc(t_main *info)
 {
 	info->tid = malloc(sizeof(pthread_t) * info->nop);
 	info->philos = malloc(sizeof(t_thdata) * info->nop);
@@ -25,7 +25,7 @@ bool	ph_alloc(t_main *info)
 	return (true);
 }
 
-bool	init_forks(t_main *info)
+static bool	init_forks(t_main *info)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ bool	init_forks(t_main *info)
 	return (true);
 }
 
-void	init_threads(t_main	*info)
+static void	init_threads(t_main	*info)
 {
 	int	i;
 
@@ -51,7 +51,6 @@ void	init_threads(t_main	*info)
 	{
 		info->philos[i].id = i + 1;
 		info->philos[i].eat_count = 0;
-		info->philos[i].time_left = info->time_to_die;
 		info->philos[i].lfork = &info->forks[i];
 		if (i == info->nop - 1)
 			info->philos[i].rfork = &info->forks[0];
@@ -62,7 +61,7 @@ void	init_threads(t_main	*info)
 
 bool	ft_init(t_main *info)
 {
-	if (!ft_alloc(info))
+	if (!philo_alloc(info))
 		return (false);
 	if (!init_forks(info))
 		return (false);

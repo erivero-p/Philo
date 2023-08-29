@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 10:59:02 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/29 11:21:54 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:59:03 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	print_status(t_thdata *philo, char st)
 {
-	int		time;
+	long		time;
 	char	*status;
 
-	time = ft_time() - philo->info->start_time;
+	time = get_time() - philo->info->start_time;
 	if (st == 'f')
 		status = "has taken a fork";
 	if (st == 'e')
@@ -30,8 +30,12 @@ void	print_status(t_thdata *philo, char st)
 		status = "has died";
 	printf("%ldms %d %s\n", time, philo->id, status);
 }
+void	ft_think(t_thdata *philo)
+{
+	print_status(philo, 't');
+}
 
-void	eat(t_thdata *philo)
+void	ft_eat(t_thdata *philo)
 {
 	if (philo->info->nop % 2 != 0 && philo->id == philo->info->nop)
 	{
@@ -50,9 +54,13 @@ void	eat(t_thdata *philo)
 	print_status(philo, 'e');
 	usleep(philo->info->time_to_eat * 1000);
 	philo->eat_count++;
-//	philo-> last_meal / time_left / whatever ya veremos
+	philo->last_meal = get_time();
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
 }
 
- 
+void	ft_sleep(t_thdata *philo)
+ {
+	print_status(philo, 's');
+	usleep(philo->info->time_to_sleep * 1000);
+}
