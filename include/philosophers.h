@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:54:44 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:22:00 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:21:09 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_main
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				eat_times;
+	int				feeded_philos; // está sin inicializar aún
 	long			start_time;
 	pthread_t		*tid;
 	t_thdata		*philos;
