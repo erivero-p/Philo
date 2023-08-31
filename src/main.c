@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:14:54 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/29 19:01:34 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:23:17 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ int	main(int ac, char **av)
 {
 	t_main	info;
 
+//	printf("a ver");
 	if (check_args(ac, av, &info))
 	{
 		if (ft_init(&info))
+		{
+			info.monitor = true;
 			ft_threads(&info);
+		}
 		philo_clean(&info);
 	}
 	return (0);

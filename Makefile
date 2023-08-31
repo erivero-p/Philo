@@ -1,4 +1,4 @@
-NAME = philosophers
+NAME = philo
 FLAGS = -Wall -Werror -Wextra
 SRC_DIR = src/
 SRC = args.c init.c main.c routine.c states.c
@@ -18,7 +18,7 @@ clean:
 	@rm -f $(OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	@rm -f $(NAME) $(BONUS_NAME)
+	@rm -f $(NAME) $(BONUS_NAME)df
 
 re: fclean all
 

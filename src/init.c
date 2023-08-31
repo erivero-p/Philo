@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:27:50 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/29 18:50:02 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:03:40 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ static void	init_threads(t_main	*info)
 	{
 		info->philos[i].id = i + 1;
 		info->philos[i].eat_count = 0;
+		info->philos[i].info = info;
 		info->philos[i].lfork = &info->forks[i];
 		if (i == info->nop - 1)
 			info->philos[i].rfork = &info->forks[0];
 		else
 			info->philos[i].rfork = &info->forks[i + 1];
+		i++;
 	}
 }
 
