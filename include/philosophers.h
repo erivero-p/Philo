@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:54:44 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/31 11:21:31 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:07:32 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_thdata
 	struct s_main	*info;
 	int				id;
 	int				eat_count;
-	int				last_meal;
+	long			last_meal;
 	pthread_mutex_t	*rfork;
 	pthread_mutex_t	*lfork;
 }	t_thdata;

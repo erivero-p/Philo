@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:05:52 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/31 13:57:15 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:13:28 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000));
 }
 
+/* void socorro(t_thdata *philo)
+{
+	long	act;
+	long	last;
+	long	die;
+
+	act = get_time();
+	last = (long)philo->last_meal;
+	die = (long)philo->info->time_to_die;
+	printf("actual time is %li\n last meal was %li\n, time to die is %li\n", act, last, die);
+} */
+
 static void	*monitorize(void *philo_ptr)
 {
 	t_thdata	*philo;
@@ -29,8 +41,8 @@ static void	*monitorize(void *philo_ptr)
 	{
 		if (get_time() - philo->last_meal > philo->info->time_to_die) // >=?
 		{
-			print_status(philo, 'd');
 			philo->info->monitor = false;
+			print_status(philo, 'd');
 			return (NULL);
 		}
  		if (philo->info->eat_times > 0)
@@ -47,20 +59,6 @@ static void	*monitorize(void *philo_ptr)
 	return (NULL);
 }
 
-/* static void *monitorize(void	*philo_ptr)
-{
- 	t_thdata	*philo;
-
-	philo = (t_thdata *)philo_ptr;
-	if (philo->id == 2)
-	{
-		sleep(1);
-		printf("sa muerto\n");
-		//	philo->info->monitor = false;
-	}
-	printf("monitoreando\n");
-	return (NULL);
-} */
 
 static void	*routine(void *philo_ptr)
 {
@@ -89,11 +87,6 @@ static void	*routine(void *philo_ptr)
 	else
 } */
 
-/* static void	*routine(void *arg)
-{
-	printf("Prueba routine\n");
-	return (NULL);
-} */
 
 int	ft_threads(t_main *info)
 {
