@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:05:52 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/01 12:13:28 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:33:02 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void	*monitorize(void *philo_ptr)
 	{
 		if (get_time() - philo->last_meal > philo->info->time_to_die) // >=?
 		{
-			philo->info->monitor = false;
 			print_status(philo, 'd');
+			philo->info->monitor = false;
 			return (NULL);
 		}
  		if (philo->info->eat_times > 0)
@@ -68,8 +68,8 @@ static void	*routine(void *philo_ptr)
 	philo = (t_thdata *)philo_ptr;
 	philo->last_meal = get_time();
 	pthread_create(&mon, NULL, &monitorize, philo);
-/* 	if (philo->id % 2 == 0)
-		usleep(1); */
+	if (philo->id % 2 == 0)
+		usleep(1);
 	while (philo->info->monitor)
 	{
 		ft_think(philo);
@@ -88,7 +88,7 @@ static void	*routine(void *philo_ptr)
 } */
 
 
-int	ft_threads(t_main *info)
+void	ft_threads(t_main *info)
 {
 	int	i;
 
@@ -102,7 +102,7 @@ int	ft_threads(t_main *info)
 		if (pthread_create(&info->tid[i], NULL, &routine, &info->philos[i]))
 		{
 			printf("Error creating threads\n");
-			return (0);
+			return ;
 		}
 	}
 	i = -1;
@@ -114,5 +114,4 @@ int	ft_threads(t_main *info)
 			break ;
 		}
 	}
-	return (0);
 }

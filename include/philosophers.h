@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:54:44 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/01 12:07:32 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:27:59 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	ft_init(t_main *info);
 long	get_time(void);
 
 // thread management
-int		ft_threads(t_main *info);
+void	ft_threads(t_main *info);
 void	print_status(t_thdata *philo, char st);
 void	ft_think(t_thdata *philo);
 void	ft_eat(t_thdata *philo);
