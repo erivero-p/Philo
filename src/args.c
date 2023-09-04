@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:14:54 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/31 10:27:44 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:36:14 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ static void	print_args(void)
 	printf(" [number_of_times_each_philosopher_must_eat]\n");
 }
 
-/* void print_argus(t_main *info)
-{
-	printf("%i\n", info->nop);
-	printf("%i\n", info->time_to_die);
-	printf("%i\n", info->time_to_eat);
-	printf("%i\n", info->time_to_sleep);
-	printf("%i\n", info->eat_times);
-} */
 bool	check_args(int ac, char **av, t_main *info)
 {
 	if (ac == 5 || ac == 6)

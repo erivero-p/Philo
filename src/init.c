@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:27:50 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/31 13:03:40 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:09:29 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static bool	init_forks(t_main *info)
 			printf("Error creating mutex\n");
 			return (false);
 		}
+//		printf("a fork has been created\n");
 		i++;
 	}
 	return (true);

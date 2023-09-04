@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:14:54 by erivero-          #+#    #+#             */
-/*   Updated: 2023/08/31 12:23:17 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:33:54 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int ac, char **av)
 {
 	t_main	info;
 
-//	printf("a ver");
 	if (check_args(ac, av, &info))
 	{
 		if (ft_init(&info))

@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:05:52 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/01 13:33:02 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:36:03 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ long	get_time(void)
 	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000));
 }
 
-/* void socorro(t_thdata *philo)
-{
-	long	act;
-	long	last;
-	long	die;
-
-	act = get_time();
-	last = (long)philo->last_meal;
-	die = (long)philo->info->time_to_die;
-	printf("actual time is %li\n last meal was %li\n, time to die is %li\n", act, last, die);
-} */
-
 static void	*monitorize(void *philo_ptr)
 {
 	t_thdata	*philo;
@@ -39,13 +27,13 @@ static void	*monitorize(void *philo_ptr)
 	philo = (t_thdata *)philo_ptr;
 	while (1)
 	{
-		if (get_time() - philo->last_meal > philo->info->time_to_die) // >=?
+		if (get_time() - philo->last_meal > philo->info->time_to_die)
 		{
 			print_status(philo, 'd');
 			philo->info->monitor = false;
 			return (NULL);
 		}
- 		if (philo->info->eat_times > 0)
+		if (philo->info->eat_times > 0)
 		{
 			if (philo->eat_count == philo->info->eat_times)
 				philo->info->feeded_philos++;
@@ -53,12 +41,11 @@ static void	*monitorize(void *philo_ptr)
 			{				
 				philo->info->monitor = false;
 				break ;
-			} 
+			}
 		}
 	}
 	return (NULL);
 }
-
 
 static void	*routine(void *philo_ptr)
 {
@@ -67,9 +54,9 @@ static void	*routine(void *philo_ptr)
 
 	philo = (t_thdata *)philo_ptr;
 	philo->last_meal = get_time();
-	pthread_create(&mon, NULL, &monitorize, philo);
+	pthread_create(&mon, NULL, monitorize, philo);
 	if (philo->id % 2 == 0)
-		usleep(1);
+		usleep(10);
 	while (philo->info->monitor)
 	{
 		ft_think(philo);
@@ -99,7 +86,7 @@ void	ft_threads(t_main *info)
 		one_philo(info); */
 	while (++i < info->nop)
 	{
-		if (pthread_create(&info->tid[i], NULL, &routine, &info->philos[i]))
+		if (pthread_create(&info->tid[i], NULL, routine, &info->philos[i]))
 		{
 			printf("Error creating threads\n");
 			return ;
