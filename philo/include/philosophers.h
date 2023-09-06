@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:54:44 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/06 17:47:44 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:16:15 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ typedef struct s_main
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				eat_times;
-	int				feeded_philos;
+	int				fed_philos;
 	long			start_time;
 	bool			monitor;
 	pthread_t		*tid;
 	t_thdata		*philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	locker;
 }	t_main;
 
 // initializers and utils
@@ -62,17 +63,3 @@ void	ft_eat(t_thdata *philo);
 void	ft_sleep(t_thdata *philo);
 
 #endif
-
-
-
-//	int				nop;
-//	int				time_to_die;
-//	int				time_to_eat;
-//	int				time_to_sleep;
-//	int				eat_times;
-	int				feeded_philos;
-	long			start_time;
-	bool			monitor;
-	pthread_t		*tid;
-	t_thdata		*philos;
-	pthread_mutex_t	*forks;
