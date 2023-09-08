@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:06:21 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 10:47:26 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:19:01 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,19 @@ static void	*routine(void *philo_ptr)
 	pthread_create(&mon, NULL, monitorize, philo);
 	if (philo->id % 2 == 0)
 		usleep(10);
-	while (philo->info->monitor)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->info->locker);
+		if (!philo->info->monitor)
+		{
+			pthread_mutex_unlock(&philo->info->locker);
+			break ;
+		}
+		pthread_mutex_unlock(&philo->info->locker);
 		ft_think(philo);
 		ft_eat(philo);
 		ft_sleep(philo);
+
 	}
 	pthread_join(mon, NULL);
 	return (NULL);
@@ -76,7 +84,10 @@ void	ft_philo(t_main *info)
 	else
 	{
 		if (info->eat_times > 0)
+		{
 			pthread_create(&meal_checker, NULL, meal_check, info);
+			pthread_detach(meal_checker);
+		}
 		ft_threads(info);
 	}
 }

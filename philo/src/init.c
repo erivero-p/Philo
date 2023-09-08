@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:49:04 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 11:20:06 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:11:38 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static bool	philo_alloc(t_main *info)
 	info->tid = malloc(sizeof(pthread_t) * info->nop);
 	info->philos = malloc(sizeof(t_thdata) * info->nop);
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->nop);
-	if (!(info->tid && info->philos && info->forks))
+	info->mutex = malloc(sizeof(t_mutex));
+	if (!(info->tid && info->philos && info->forks && info->mutex))
 	{
 		printf("Error allocating memory\n");
 		return (false);
@@ -57,6 +58,11 @@ static bool	init_mutex(t_main *info)
 		return (false);
 	}
 	if (pthread_mutex_init(&info->eat, NULL))
+	{
+		printf("Error creating mutex\n");
+		return (false);
+	}
+	if (pthread_mutex_init(&info->mutex->last_meal, NULL))
 	{
 		printf("Error creating mutex\n");
 		return (false);

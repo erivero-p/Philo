@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:41:39 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 11:35:40 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:23:46 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	mutex_clean(t_main *info)
 	pthread_mutex_destroy(&info->locker);
 	pthread_mutex_destroy(&info->write);
 	pthread_mutex_destroy(&info->eat);
+	pthread_mutex_destroy(&info->mutex->last_meal);
+	free (info->mutex);
 }
 
 static void	philo_clean(t_main *info)
@@ -44,13 +46,18 @@ static void	philo_clean(t_main *info)
 		free(info->philos);
 	if (info->forks)
 		mutex_clean(info);
+}
 
+void	check_leakss(void)
+{
+	system("leaks -q philo");
 }
 
 int	main(int ac, char **av)
 {
 	t_main	info;
 
+	atexit(check_leakss);
 	if (check_args(ac, av, &info))
 	{
 		if (ft_init(&info))
