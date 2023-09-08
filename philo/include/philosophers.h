@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:54:44 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/06 18:16:15 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:34:32 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_main
 	t_thdata		*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	locker;
+	pthread_mutex_t	write;
+	pthread_mutex_t	eat;
 }	t_main;
 
 // initializers and utils
@@ -56,7 +58,9 @@ bool	ft_init(t_main *info);
 long	get_time(void);
 
 // thread management
-void	ft_threads(t_main *info);
+void	ft_philo(t_main *info);
+void	*monitorize(void *philo_ptr);
+void	*meal_check(void *info_ptr);
 void	print_status(t_thdata *philo, char st);
 void	ft_think(t_thdata *philo);
 void	ft_eat(t_thdata *philo);

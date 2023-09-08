@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:49:04 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/06 17:53:17 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:20:06 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ static bool	init_mutex(t_main *info)
 	if (!init_forks(info))
 		return (false);
 	if (pthread_mutex_init(&info->locker, NULL))
+	{
+		printf("Error creating mutex\n");
+		return (false);
+	}
+	if (pthread_mutex_init(&info->write, NULL))
+	{
+		printf("Error creating mutex\n");
+		return (false);
+	}
+	if (pthread_mutex_init(&info->eat, NULL))
 	{
 		printf("Error creating mutex\n");
 		return (false);
