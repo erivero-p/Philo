@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 10:59:02 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 14:57:45 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/09 12:55:26 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	print_status(t_thdata *philo, char st)
 
 	time = get_time() - philo->info->start_time;
 	status = NULL;
-	pthread_mutex_lock(&philo->info->locker);
+	pthread_mutex_lock(&philo->info->mutex->locker);
 	if (philo->info->monitor)
 	{
-//		pthread_mutex_unlock(&philo->info->locker);
+		pthread_mutex_unlock(&philo->info->mutex->locker);
 		if (st == 'f')
 			status = "has taken a fork";
 		if (st == 'e')
@@ -33,11 +33,11 @@ void	print_status(t_thdata *philo, char st)
 			status = "is thinking";
 		if (st == 'd')
 			status = "has died";
-		pthread_mutex_lock(&philo->info->write);
+		pthread_mutex_lock(&philo->info->mutex->write);
 		printf("%ld %d %s\n", time, philo->id, status);
-		pthread_mutex_unlock(&philo->info->write);
+		pthread_mutex_unlock(&philo->info->mutex->write);
 	}
-	pthread_mutex_unlock(&philo->info->locker);
+	pthread_mutex_unlock(&philo->info->mutex->locker);
 }
 
 void	ft_think(t_thdata *philo)
@@ -49,9 +49,9 @@ static void	eat_counter(t_thdata *philo)
 {
 	if (philo->eat_count == philo->info->eat_times)
 	{
-		pthread_mutex_lock(&philo->info->eat);
+		pthread_mutex_lock(&philo->info->mutex->eat);
 		philo->info->fed_philos++;
-		pthread_mutex_unlock(&philo->info->eat);
+		pthread_mutex_unlock(&philo->info->mutex->eat);
 	}
 }
 

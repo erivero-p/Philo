@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:06:21 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 15:19:01 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/09 12:56:53 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static void	*routine(void *philo_ptr)
 	pthread_t	mon;
 
 	philo = (t_thdata *)philo_ptr;
-	philo->last_meal = get_time(); //accede a la info del propio philo, no la general
+	philo->last_meal = get_time();
 	pthread_create(&mon, NULL, monitorize, philo);
 	if (philo->id % 2 == 0)
-		usleep(10);
+		usleep(1);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->info->locker);
+		pthread_mutex_lock(&philo->info->mutex->locker);
 		if (!philo->info->monitor)
 		{
-			pthread_mutex_unlock(&philo->info->locker);
+			pthread_mutex_unlock(&philo->info->mutex->locker);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->info->locker);
+		pthread_mutex_unlock(&philo->info->mutex->locker);
 		ft_think(philo);
 		ft_eat(philo);
 		ft_sleep(philo);

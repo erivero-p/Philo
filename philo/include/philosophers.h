@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:54:44 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 15:23:58 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/09 12:46:38 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_thdata
 typedef struct s_mutex
 {
 	pthread_mutex_t last_meal;
+	pthread_mutex_t	locker;
+	pthread_mutex_t	write;
+	pthread_mutex_t	eat;
 } t_mutex;
 //r_fork y l_fork son punteros porque son recursos compartidos
 typedef struct s_main
@@ -53,9 +56,6 @@ typedef struct s_main
 	t_thdata		*philos;
 	t_mutex			*mutex;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	locker;
-	pthread_mutex_t	write;
-	pthread_mutex_t	eat;
 }	t_main;
 
 // initializers and utils

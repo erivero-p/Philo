@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:41:39 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/08 15:23:46 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/09 12:57:35 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,15 @@ static void	mutex_clean(t_main *info)
 	while (++i < info->nop)
 		pthread_mutex_destroy(&info->forks[i]);
 	free (info->forks);
-	pthread_mutex_destroy(&info->locker);
-	pthread_mutex_destroy(&info->write);
-	pthread_mutex_destroy(&info->eat);
+	pthread_mutex_destroy(&info->mutex->locker);
+	pthread_mutex_destroy(&info->mutex->write);
+	pthread_mutex_destroy(&info->mutex->eat);
 	pthread_mutex_destroy(&info->mutex->last_meal);
 	free (info->mutex);
 }
 
 static void	philo_clean(t_main *info)
 {
-	int	i;
-
-	i = -1;
 	if (info->tid)
 		free(info->tid);
 	if (info->philos)
@@ -48,16 +45,16 @@ static void	philo_clean(t_main *info)
 		mutex_clean(info);
 }
 
-void	check_leakss(void)
+/* void	check_leakss(void)
 {
 	system("leaks -q philo");
-}
+} */
 
 int	main(int ac, char **av)
 {
 	t_main	info;
 
-	atexit(check_leakss);
+//	atexit(check_leakss);
 	if (check_args(ac, av, &info))
 	{
 		if (ft_init(&info))
