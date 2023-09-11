@@ -6,39 +6,11 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 10:59:02 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/09 12:55:26 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:07:12 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
-
-void	print_status(t_thdata *philo, char st)
-{
-	long	time;
-	char	*status;
-
-	time = get_time() - philo->info->start_time;
-	status = NULL;
-	pthread_mutex_lock(&philo->info->mutex->locker);
-	if (philo->info->monitor)
-	{
-		pthread_mutex_unlock(&philo->info->mutex->locker);
-		if (st == 'f')
-			status = "has taken a fork";
-		if (st == 'e')
-			status = "is eating";
-		if (st == 's')
-			status = "is sleeping";
-		if (st == 't')
-			status = "is thinking";
-		if (st == 'd')
-			status = "has died";
-		pthread_mutex_lock(&philo->info->mutex->write);
-		printf("%ld %d %s\n", time, philo->id, status);
-		pthread_mutex_unlock(&philo->info->mutex->write);
-	}
-	pthread_mutex_unlock(&philo->info->mutex->locker);
-}
 
 void	ft_think(t_thdata *philo)
 {

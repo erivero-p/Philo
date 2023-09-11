@@ -6,7 +6,7 @@
 /*   By: erivero- <erivero-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:41:39 by erivero-          #+#    #+#             */
-/*   Updated: 2023/09/09 12:57:35 by erivero-         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:05:18 by erivero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ static void	philo_clean(t_main *info)
 /* void	check_leakss(void)
 {
 	system("leaks -q philo");
+	atexit(check_leakss);
 } */
 
 int	main(int ac, char **av)
 {
 	t_main	info;
 
-//	atexit(check_leakss);
 	if (check_args(ac, av, &info))
 	{
 		if (ft_init(&info))
